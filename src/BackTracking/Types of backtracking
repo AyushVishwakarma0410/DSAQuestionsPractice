@@ -1,0 +1,8 @@
+1. Decision - should say yes or no ?
+2. Enumeration - all possible ways
+3. Optimization - most efficient way
+
+Backtracking is all about what will happen when we do winding and what will happen if we do unwinding.
+
+Look at the backtrackTrackingInArrays File
+

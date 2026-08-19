@@ -1,0 +1,5 @@
+1. Inorder Traversal of BST always give sorted sequence, every single one.
+2. left subtree has nodes smaller than root
+3. right subtree has nodes greater than node
+4. Duplicates are not allowed
+5. Most problems will be solved using recursion

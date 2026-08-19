@@ -1,0 +1,175 @@
+A **Trie (Prefix Tree)** is a powerful data structure used mainly for **efficient string operations**, especially when dealing with prefixes.
+
+---
+
+## 🌳 What is a Trie?
+
+A **Trie** is a tree-like structure where:
+
+* Each node represents a character
+* Paths from root form words
+* It is mainly used for **strings**, not numbers
+
+---
+
+## 🔑 Key Operations
+
+1. **Insert a word**
+2. **Search a word**
+3. **Check prefix (startsWith)**
+
+---
+
+## 🧠 Why Use Trie?
+
+| Operation     | Time Complexity |
+| ------------- | --------------- |
+| Insert        | O(L)            |
+| Search        | O(L)            |
+| Prefix Search | O(L)            |
+
+👉 `L = length of word`
+
+Much faster than:
+
+* Hashing (for prefix problems)
+* Brute force string matching
+
+---
+
+## 📌 Common Use Cases
+
+### 1. 🔍 Auto-complete / Suggestions
+
+* Used in search engines (like Google)
+* Example: typing `"app"` → suggests `"apple", "appetite"`
+
+---
+
+### 2. 📖 Dictionary / Spell Checker
+
+* Check if a word exists quickly
+
+---
+
+### 3. 🔤 Prefix Matching
+
+* Find all words starting with a prefix
+
+---
+
+### 4. 🧩 Word Games
+
+* Scrabble, Boggle, Word Search
+
+---
+
+### 5. 📊 Longest Prefix Matching
+
+* Used in **IP routing (networking)**
+
+---
+
+### 6. 🧵 Pattern Matching
+
+* Efficient multi-pattern search (used in advanced algorithms)
+
+---
+
+## 💻 Basic Java Implementation
+
+```java
+class TrieNode {
+    TrieNode[] children = new TrieNode[26];
+    boolean isEnd = false;
+}
+
+public class Trie {
+    TrieNode root = new TrieNode();
+
+    // Insert word
+    public void insert(String word) {
+        TrieNode curr = root;
+        for (char ch : word.toCharArray()) {
+            int idx = ch - 'a';
+            if (curr.children[idx] == null) {
+                curr.children[idx] = new TrieNode();
+            }
+            curr = curr.children[idx];
+        }
+        curr.isEnd = true;
+    }
+
+    // Search word
+    public boolean search(String word) {
+        TrieNode curr = root;
+        for (char ch : word.toCharArray()) {
+            int idx = ch - 'a';
+            if (curr.children[idx] == null) {
+                return false;
+            }
+            curr = curr.children[idx];
+        }
+        return curr.isEnd;
+    }
+
+    // Check prefix
+    public boolean startsWith(String prefix) {
+        TrieNode curr = root;
+        for (char ch : prefix.toCharArray()) {
+            int idx = ch - 'a';
+            if (curr.children[idx] == null) {
+                return false;
+            }
+            curr = curr.children[idx];
+        }
+        return true;
+    }
+}
+```
+
+---
+
+## ⚠️ When NOT to Use Trie
+
+* When memory is limited (Trie uses a lot of space)
+* When dataset is small
+* When no prefix-based queries are needed
+
+---
+
+## 🔥 Interview Insight
+
+👉 Use Trie when:
+
+* Problem involves **strings**
+* You see keywords like:
+
+  * "prefix"
+  * "dictionary"
+  * "auto-complete"
+  * "search suggestions"
+
+---
+
+## 🚀 Bonus Insight
+
+Your **Sliding Window Maximum problem** ❌ does NOT use Trie
+👉 It uses:
+
+* Heap (your approach)
+* Deque (optimal)
+
+---
+
+## 👍 Summary
+
+* Trie = Best for **prefix-based string problems**
+* Time efficient but **space heavy**
+* Common in real-world systems (search, autocomplete)
+
+---
+
+If you want next:
+👉 I can give you **top 5 Trie interview questions** (with patterns) or
+👉 Show a **real autocomplete system implementation** step-by-step

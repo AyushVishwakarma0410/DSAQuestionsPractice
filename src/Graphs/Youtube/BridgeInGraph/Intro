@@ -1,0 +1,47 @@
+1. bridge is an edge whose deletion increases the graph's number of connected components.
+2. Trajan's algorithm
+    a. can be used to find many things
+    b. 2 arrays -> discovery time array, lowest discovery time array
+
+1.  [] dt = new dt[];
+2.  [] ldt = new ldt[];
+
+3. Articulation point -> A vertex in an undirected graph is an articulation point (or cut vertex) if removing it
+(and edges through it ) disconnects the graph.
+4. Articulation point shows vulnerability in networks.
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+BFS,DFS and topological sort are important
+Bidirectional Search is used for optimization
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
+For specialized roles, in MNCs you must know advanced traversal techniques such as A* search etc.
+
+
+
+
+0:00 Intro
+1:24 - Basics of Graph
+16:52 - Creating a Graph (4 ways)
+01:03:45 - BFS
+01:30:51 - DFS
+01:44:57 - All Paths Qs
+02:11:47 - Assignment 1
+02:12:46 - Cycle Detection (Directed Graph)
+02:57:14 - Cycle Detection (Undirected Graph)
+02:34:22 - Topological Sort
+03:16:25 - Assignment 2
+03:16:28 - Dijkstra's Algorithm
+04:00:31 - BellmanFord Algorithm
+04:23:06 - Assignment 3
+04:23:28 - What is MST?
+04:29:02 - Prim's Algorithm
+04:53:24 - Kosaraju's Algorithm (SCC)
+05:21:20 - Assignment 4
+05:21:23 - Bridge in Graph (Tarjan's Algorithm)
+05:53:57 - Articulation Point in Graph (Tarjan's Algorithm)
+06:43:59 - Assignment 5

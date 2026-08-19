@@ -1,0 +1,49 @@
+// Merge sort
+
+// Concept wise
+1. In merge sort as you know, we divide the whole array into single arrays
+2. then we compare each single digit array to its neighbour
+3. after that we compare the newly formed array with the neighbour array
+
+
+// code working
+1. we use recursion to divide the array into several small subarrays.
+2. the return condition is when start >= end but mostly it is start == end
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+3. Remember we do not create small sub-arrays all at once.
+4. We go first to the left most part i.e. 0,0 and 1,1 then -> we go 0,2 -> 0 , n where n is the mid element
+   of the left part which is created during the first division . There n == mid
+5. Then we go to right part of the first division which starts from mid + 1 to end
+6. we divide me until we get -> (mid+1, mid+1) and (end,end) then we do the exact same thing in this part
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+7. About the merge function, we create a sep array temp with size of  end - start + 1
+8. Suppose we pass start = 0, mid = 0 and end = 1, we will have two elements, arr[0] and arr[1]
+   so start = 0 end = 1 -> end - start = 1, there we do +1 => 2, the size of temp
+9. we take 3 iterators and sort the array.
+10 . Then in the end we copy paste the values at the indices we have used.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+// Quick Sort
+
+
+
+1. Quicksort’s partition step behaves like a two-pointer technique, where:
+        You take a target (pivot)
+2. Rearrange elements such that:
+        All elements ≤ pivot → left side
+3. All elements > pivot → right side
+4. Order inside each side does NOT matter
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+6. The chosen element ( pivot ) always gets to its best possible solution due to last swap
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

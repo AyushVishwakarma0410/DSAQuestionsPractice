@@ -1,0 +1,8 @@
+||=========================================Trees========================================||
+
+1. In Trees we mostly use BFS.
+2. DFS is also used but it depends on the situation.
+3. BFS is done using queues and a while loop.
+4. we sometimes use a for loop inside a while loop.
+5. This is because we want to make changes in a particular level.
+6. if we don't require a level by action then there is no need for a for-loop.

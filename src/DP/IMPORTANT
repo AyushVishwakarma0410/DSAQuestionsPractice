@@ -1,0 +1,4 @@
+1. In order to solve overlapping sub problems, we use DP.
+2. The method we use in DP is known as memorization i.e. tend to store the value of sub problems in some map or table.
+3. We also have tabulation, we use loops in that
+4. IMP -> we have two state looking ways -> forward looking States, backward looking states.

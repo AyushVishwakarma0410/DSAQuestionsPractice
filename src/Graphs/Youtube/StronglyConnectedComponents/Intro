@@ -1,0 +1,25 @@
+1. SCC is a component in which we can reach every vertex of the component from every other vertex in that
+   component.
+
+
+
+   1 --------> 0 ------> 3
+   |          /          |
+   |         /           |
+   |        /            |
+   |       /             |
+   |      /              v
+   |     /               4
+   |    /
+   |   /
+   |  /
+   | /
+    2
+
+
+
+total scc = 3 , {1-2-0},{3},{4}
+
+
+2. In order to print SCCs we use Kosaraju's Algorithm
+   * Do reverse DFS

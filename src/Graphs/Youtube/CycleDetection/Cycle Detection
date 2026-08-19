@@ -1,0 +1,5 @@
+DFS
+
+
+1. Directed graph = recursion stack ( array )
+2. Undirected graph = parent check

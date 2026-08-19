@@ -1,0 +1,255 @@
+Yes — you can generate **all topological orders of a graph**, but only if the graph is a **Directed Acyclic Graph (DAG)**, and the process is inherently **backtracking-based** (not BFS/DFS like standard topo sort).
+
+This is a classic extension of topological sorting where instead of picking one valid node each time, you explore **all valid choices at every step**.
+
+---
+
+# 📌 Problem: Generate All Topological Orders
+
+Given a directed graph, list **all possible topological orderings**.
+
+---
+
+# ✅ Requirements
+
+You must have:
+
+### 1. Graph must be a DAG
+
+* If there is a cycle → **no topological order exists**
+
+### 2. Node constraints
+
+At each step:
+
+* You can only pick nodes with **indegree = 0**
+* And not already included in the current ordering
+
+### 3. Goal
+
+* Generate **every valid permutation that satisfies dependencies**
+
+---
+
+# 🧠 Key Idea
+
+Instead of choosing ONE node (like Kahn’s algorithm), you:
+
+> Try ALL possible nodes with indegree = 0 at each step
+
+This turns the problem into:
+
+> 🔁 Backtracking + state restoration
+
+---
+
+# ⚙️ Algorithm (Step-by-step)
+
+## Step 1: Build graph
+
+* adjacency list
+* indegree array
+
+## Step 2: Maintain state
+
+* `visited[]`
+* `currentList` (current topological order)
+
+## Step 3: Backtracking function
+
+At each recursion:
+
+1. If `currentList.size == n` → store result
+2. Try every node `i`:
+
+   * if `indegree[i] == 0` and not visited:
+
+     * choose it
+     * reduce indegree of neighbors
+     * recurse
+     * backtrack (restore state)
+
+---
+
+# 🔁 Pseudocode
+
+```text
+allTopoSorts():
+
+    for each node:
+        if indegree[node] == 0 and not visited:
+            choose node
+            mark visited
+            reduce indegree of neighbors
+
+            recurse
+
+            undo changes (backtrack)
+```
+
+---
+
+# 💻 Java Implementation
+
+```java
+import java.util.*;
+
+public class AllTopologicalSorts {
+
+    static List<List<Integer>> result = new ArrayList<>();
+
+    public static List<List<Integer>> allTopologicalSorts(int n, List<List<Integer>> graph) {
+
+        int[] indegree = new int[n];
+        boolean[] visited = new boolean[n];
+
+        // compute indegree
+        for (int i = 0; i < n; i++) {
+            for (int nei : graph.get(i)) {
+                indegree[nei]++;
+            }
+        }
+
+        List<Integer> path = new ArrayList<>();
+
+        dfs(graph, indegree, visited, path, n);
+
+        return result;
+    }
+
+    private static void dfs(List<List<Integer>> graph,
+                            int[] indegree,
+                            boolean[] visited,
+                            List<Integer> path,
+                            int n) {
+
+        boolean found = false;
+
+        for (int i = 0; i < n; i++) {
+
+            if (!visited[i] && indegree[i] == 0) {
+
+                // choose
+                visited[i] = true;
+                path.add(i);
+
+                for (int nei : graph.get(i)) {
+                    indegree[nei]--;
+                }
+
+                dfs(graph, indegree, visited, path, n);
+
+                // backtrack
+                visited[i] = false;
+                path.remove(path.size() - 1);
+
+                for (int nei : graph.get(i)) {
+                    indegree[nei]++;
+                }
+
+                found = true;
+            }
+        }
+
+        // If no node was chosen and path is complete
+        if (!found && path.size() == n) {
+            result.add(new ArrayList<>(path));
+        }
+    }
+
+    // helper to build graph
+    public static List<List<Integer>> buildGraph(int n, int[][] edges) {
+
+        List<List<Integer>> graph = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            graph.add(new ArrayList<>());
+        }
+
+        for (int[] e : edges) {
+            graph.get(e[0]).add(e[1]);
+        }
+
+        return graph;
+    }
+}
+```
+
+---
+
+# 🧠 Example
+
+Graph:
+
+```text
+0 → 1
+0 → 2
+1 → 3
+2 → 3
+```
+
+Possible topological orders:
+
+```
+0 1 2 3
+0 2 1 3
+```
+
+---
+
+# 📊 Complexity
+
+## Worst case:
+
+* Number of topo orders = **exponential (O(n!))**
+
+So:
+
+* ❌ Not scalable for large graphs
+* ✅ Only used for small graphs / interview / theoretical problems
+
+---
+
+# 🔥 Key Insights (VERY important)
+
+### 1. Kahn’s algorithm vs this
+
+| Task             | Method           |
+| ---------------- | ---------------- |
+| One topo order   | BFS (Kahn)       |
+| Check uniqueness | queue size check |
+| All topo orders  | backtracking     |
+
+---
+
+### 2. Why LC 444 does NOT use this
+
+Because:
+
+> It only cares if the order is UNIQUE, not all possibilities
+
+So instead of exploring all paths, it:
+
+* Detects branching (multiple indegree-0 nodes)
+
+---
+
+### 3. Mental model
+
+Think of it like:
+
+> Each time you choose a node, you're creating a "timeline branch"
+
+All topological orders = exploring ALL timelines.
+
+---
+
+# ⚡ If you want next step
+
+I can show you:
+
+* 🔥 Step-by-step dry run on a graph
+* 🔥 How recursion tree looks visually
+* 🔥 Or how to optimize pruning (important for interviews)
+
+Just tell me 👍

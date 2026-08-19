@@ -1,0 +1,250 @@
+| Type                          | Use Case                |
+| ----------------------------- | ----------------------- |
+| `List<List<Integer>>`         | simple unweighted graph |
+| `List<List<Edge>>`            | weighted graph          |
+| `ArrayList<Integer>[]`        | fast CP unweighted      |
+| `ArrayList<Edge>[]`           | Dijkstra / MST          |
+| `Map<Integer, List<Integer>>` | sparse / non-continuous |
+| `Map<String, List<String>>`   | real-world graphs       |
+| `Node class`                  | OOP / system design     |
+
+
+DECISION TREE OF WHEN TO USE WHAT
+
+Start
+ │
+ ├── Nodes are integers?
+ │       │
+ │       ├── Yes
+ │       │     ├── Weighted?
+ │       │     │       ├── Yes → ArrayList<Edge>[] OR List<List<Edge>>
+ │       │     │       └── No  → List<List<Integer>> OR ArrayList<Integer>[]
+ │       │
+ │       └── No (String/Object)
+ │             ├── Weighted?
+ │             │       ├── Yes → Map<K, List<Edge>>
+ │             │       └── No  → Map<K, List<K>>
+ │             │
+ │             └── Need no duplicates?
+ │                     └── Use Set instead of List
+ │
+ └── End
+
+
+
+
+Here are the **standard adjacency list graph templates in Java**—the ones you’ll actually use in interviews and competitive programming.
+
+I’ll group them cleanly so you can remember them easily.
+
+---
+
+# 🧠 1. `List<List<Integer>>` (most common CP template)
+
+### ✔️ Best for: integer nodes (0 to n-1)
+
+```java id="t1"
+int n = 5;
+List<List<Integer>> graph = new ArrayList<>();
+
+for (int i = 0; i < n; i++) {
+    graph.add(new ArrayList<>());
+}
+```
+
+### ➕ Add edge
+
+```java id="t2"
+graph.get(u).add(v);
+graph.get(v).add(u); // undirected
+```
+
+---
+
+# 🧠 2. `List<List<Edge>>` (weighted graph)
+
+### ✔️ Best for: weighted graphs
+
+```java id="t3"
+class Edge {
+    int v, w;
+    Edge(int v, int w) {
+        this.v = v;
+        this.w = w;
+    }
+}
+```
+
+### Graph:
+
+```java id="t4"
+int n = 5;
+List<List<Edge>> graph = new ArrayList<>();
+
+for (int i = 0; i < n; i++) {
+    graph.add(new ArrayList<>());
+}
+```
+
+### Add edge:
+
+```java id="t5"
+graph.get(u).add(new Edge(v, w));
+graph.get(v).add(new Edge(u, w)); // undirected
+```
+
+---
+
+# 🧠 3. `ArrayList<Integer>[]` (array of lists)
+
+### ✔️ Fast CP-style alternative
+
+```java id="t6"
+int n = 5;
+ArrayList<Integer>[] graph = new ArrayList[n];
+
+for (int i = 0; i < n; i++) {
+    graph[i] = new ArrayList<>();
+}
+```
+
+### Add edge:
+
+```java id="t7"
+graph[u].add(v);
+graph[v].add(u);
+```
+
+---
+
+# 🧠 4. `ArrayList<Edge>[]` (classic weighted CP)
+
+### ✔️ Most used in Dijkstra / shortest path
+
+```java id="t8"
+class Edge {
+    int v, w;
+    Edge(int v, int w) {
+        this.v = v;
+        this.w = w;
+    }
+}
+
+int n = 5;
+ArrayList<Edge>[] graph = new ArrayList[n];
+
+for (int i = 0; i < n; i++) {
+    graph[i] = new ArrayList<>();
+}
+```
+
+### Add edge:
+
+```java id="t9"
+graph[u].add(new Edge(v, w));
+graph[v].add(new Edge(u, w));
+```
+
+---
+
+# 🧠 5. `Map<Integer, List<Integer>>` (flexible graph)
+
+### ✔️ When nodes are not continuous
+
+```java id="t10"
+Map<Integer, List<Integer>> graph = new HashMap<>();
+```
+
+### Add edge:
+
+```java id="t11"
+graph.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
+graph.computeIfAbsent(v, k -> new ArrayList<>()).add(u);
+```
+
+---
+
+# 🧠 6. `Map<String, List<String>>` (real-world graphs)
+
+### ✔️ Used in LC 126, word problems, dependency graphs
+
+```java id="t12"
+Map<String, List<String>> graph = new HashMap<>();
+```
+
+### Add edge:
+
+```java id="t13"
+graph.computeIfAbsent(u, k -> new ArrayList<>()).add(v);
+```
+
+---
+
+# 🧠 7. `Map<String, Set<String>>` (no duplicates)
+
+```java id="t14"
+Map<String, Set<String>> graph = new HashMap<>();
+```
+
+### Add edge:
+
+```java id="t15"
+graph.computeIfAbsent(u, k -> new HashSet<>()).add(v);
+```
+
+---
+
+# 🧠 8. OOP-style Node graph (advanced)
+
+```java id="t16"
+class Node {
+    int val;
+    List<Node> neighbors = new ArrayList<>();
+}
+```
+
+### Use case:
+
+* Trees
+* Design problems
+* Object-based graphs
+
+---
+
+# 🔥 QUICK SUMMARY TABLE
+
+| Type                          | Use Case                |
+| ----------------------------- | ----------------------- |
+| `List<List<Integer>>`         | simple unweighted graph |
+| `List<List<Edge>>`            | weighted graph          |
+| `ArrayList<Integer>[]`        | fast CP unweighted      |
+| `ArrayList<Edge>[]`           | Dijkstra / MST          |
+| `Map<Integer, List<Integer>>` | sparse / non-continuous |
+| `Map<String, List<String>>`   | real-world graphs       |
+| `Node class`                  | OOP / system design     |
+
+---
+
+# 🧠 FINAL INTERVIEW INSIGHT
+
+👉 There is no single “best” way.
+
+> You choose based on:
+
+* Node type (int vs string)
+* Weighted vs unweighted
+* Dense vs sparse
+* Performance needs
+
+---
+
+# 🔑 One-line memory trick
+
+> “Array/List for speed, Map for flexibility, Edge class for weights.”
+
+---
+
+If you want, I can next give you:
+
+* 🔥 BFS/DFS templates for each type
+* or a decision tree: “which graph type should I use in interviews?”
