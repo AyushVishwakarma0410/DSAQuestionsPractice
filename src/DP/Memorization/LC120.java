@@ -6,6 +6,7 @@ public class LC120 {
 
 
 
+
     // self done
     // annoying
     public static void main(String[] args) {
