@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Lc120 {
 
+
+    // further optimization would be 1 D array of DP
     // self done
     public static void main(String[] args) {
 
