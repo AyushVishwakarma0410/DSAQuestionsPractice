@@ -1,4 +1,5 @@
-//package DP.Memorization;
-//
-//public class LC72 {
-//}
+package DP.Memorization;
+
+public class LC72 {
+    
+}
