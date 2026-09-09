@@ -13,6 +13,7 @@ public class LC115 {
 
 //        System.out.println(solve(s,"rabbit",0,new StringBuilder()));
 
+
         System.out.println(numDistinct(s,t));
     }
 
@@ -24,7 +25,12 @@ public class LC115 {
         for(int [] d : dp)
             Arrays.fill(d,-1);
 
-         return solve(s,t,0,0,dp);
+         int ans =  solve(s,t,0,0,dp);
+
+         for (int [] d : dp){
+             System.out.println(Arrays.toString(d));
+         }
+        return ans;
     }
 
     public static int solve(String s, String t, int i,int j,int [][] dp){
