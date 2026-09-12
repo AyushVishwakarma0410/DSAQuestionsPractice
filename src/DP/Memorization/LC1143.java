@@ -43,9 +43,9 @@ public class LC1143 {
             return dp[i][j];
         }
 
-        int ans = 0;
+        int ans ;
         if(text1.charAt(i)==text2.charAt(j)){
-            ans += 1 + lcs(text1,text2,i+1,j+1,dp);
+            ans = 1 + lcs(text1,text2,i+1,j+1,dp);
         }else {
             ans = Math.max(lcs(text1,text2,i,j+1,dp), lcs(text1,text2,i+1,j,dp));
         }
